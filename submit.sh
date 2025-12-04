@@ -16,7 +16,7 @@ function print_usage {
 
 function clone_repo_if_not_present {
   if [ ! -d "$lbName" ]; then
-    git clone https://studi:glpat-eoczbaUiJDgxJApz1YsD@git.rwth-aachen.de/tuda-sc/peng-praktikum/ws24-25/performance-challenge-leaderboard.git "$lbName"
+    git clone https://studi:glpat-p9g6feU-i2ouy2MB4w9hwm86MQp1OjFmcGYK.01.100x65fk0@git.rwth-aachen.de/tuda-sc/peng-praktikum/ws25-26/performance-challenge-leaderboard.git "$lbName"
   fi
 }
 

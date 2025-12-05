@@ -21,11 +21,9 @@
 #SBATCH -A kurs00095
 #SBATCH --reservation=kurs00095
 
-spack env activate /work/home/kurse/kurs00095/task3-spackenv
-
 srun bash -c "sleep 2 && lscpu -e"
-cd build
 
+cd build
 srun --cpus-per-task=16 /usr/bin/time ./minicfd -d 100 -e 6 -s 0.4
 srun --cpus-per-task=16 /usr/bin/time ./minicfd -d 100 -e 6 -s 0.4
 srun --cpus-per-task=16 /usr/bin/time ./minicfd -d 100 -e 6 -s 0.4

@@ -21,6 +21,12 @@
 #SBATCH -A kurs00095
 #SBATCH --reservation=kurs00095
 
+# Switch to custom Spack installation and enable prepared environment
+export SPACK_USER_CACHE_PATH=${HOME}/.pengspack
+export SPACK_USER_CONFIG_PATH=${HOME}/.pengspack
+source /work/home/kurse/kurs00095/pengspack/share/spack/setup-env.sh
+spack env activate /work/home/kurse/kurs00095/task3-spackenv
+
 srun bash -c "sleep 2 && lscpu -e"
 
 cd build

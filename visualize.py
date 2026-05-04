@@ -7,6 +7,7 @@
 from paraview.simple import *
 import argparse
 import glob
+import re
 
 
 # Input parameters
@@ -18,7 +19,10 @@ parser.add_argument("--size", type=int, action="store", help="grid size")
 
 argvals = parser.parse_args()
 
-file_list = sorted(glob.glob(argvals.input))
+def numeric_key(path):
+    m = re.search(r'(\d+)(?!.*\d)', path)  # last number in the path
+    return int(m.group(1)) if m else 0
+file_list = sorted(glob.glob(argvals.input), key=numeric_key)
 
 print(f"Loaded {len(file_list)} files. First filename: '{file_list[0]}'")
 
@@ -249,11 +253,11 @@ velocityPWF = GetOpacityTransferFunction('Velocity')
 # get 2D transfer function for 'Velocity'
 velocityTF2D = GetTransferFunction2D('Velocity')
 
-# Rescale transfer function
-velocityLUT.RescaleTransferFunction(0.0, 200)
+# Apply Viridis colorscheme preset
+velocityLUT.ApplyPreset('Viridis (matplotlib)', True)
 
-# Rescale transfer function
-velocityPWF.RescaleTransferFunction(0.0, 200)
+velocityLUT.RescaleTransferFunction(0.0, 12.0)
+velocityPWF.RescaleTransferFunction(0.0, 12.0)
 
 # create a new 'Glyph'
 glyph1 = Glyph(registrationName='Glyph1', Input=slice1,
@@ -351,6 +355,15 @@ velocityLUTColorBar.WindowLocation = 'Any Location'
 velocityLUTColorBar.Position = [0.8661909009812666, 0.09999999999999998]
 velocityLUTColorBar.ScalarBarLength = 0.3299999999999998
 
+# Background color: white
+renderView1.UseColorPaletteForBackground = 0
+renderView1.BackgroundColorMode = 'Single Color'
+renderView1.Background = [1.0, 1.0, 1.0]
+
+# Make colorbar text readable on white background
+velocityLUTColorBar.TitleColor = [0.0, 0.0, 0.0]
+velocityLUTColorBar.LabelColor = [0.0, 0.0, 0.0]
+
 ## Set frame
 
 animationScene1.AnimationTime = frame_to_render
@@ -362,7 +375,7 @@ SaveScreenshot(f"frame_{frame_to_render}.png", viewOrLayout=renderView1, locatio
 if animate:
     # save animation
     print(f"Saving animation with {num_frames} frames")
-    SaveAnimation(filename='anim.avi', viewOrLayout=renderView1, location=16, ImageResolution=[1120, 900],
+    SaveAnimation(filename='anim.png', viewOrLayout=renderView1, location=16, ImageResolution=[1120, 900],
 FrameRate=4, FrameWindow=[0, num_frames])
     print("Done!")
     

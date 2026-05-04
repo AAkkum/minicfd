@@ -33,9 +33,14 @@ See `python visualize.py -h` for available parameters.
 
 ### Run visualization
 ```bash
-pvpython visualize.py "<simulation_dir>/fields.csv.*" --frame 20 --size 64
+pvpython visualize.py "<simulation_dir>/fields.csv.*" --animate --size 64
 ```
 Make sure to match the `-size` parameter to the grid size (`-d`) from the simulation call.
+
+To encode the resulting PNG files into an MP4-file, FFmpeg can be used:
+```bash
+ffmpeg -framerate 20 -i anim.%04d.png -c:v libx264 -pix_fmt yuv420p -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" out.mp4
+```
 
 ## Tests
 To run the tests, first enable their compilation at configure time by passing `-DBUILD_TESTS=ON` to CMake.

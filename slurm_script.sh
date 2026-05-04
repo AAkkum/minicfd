@@ -8,24 +8,21 @@
 #SBATCH --mem-per-cpu=3000
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH -c 96
+#SBATCH -c 104
 #SBATCH -C avx512
-#SBATCH -C i01
+#SBATCH -C i02
 ##SBATCH --exclusive
 
 ### Frequency pinning
 #SBATCH --cpu-freq=HighM1
 
 ### Data for our project
-#SBATCH -p kurs00095
-#SBATCH -A kurs00095
-#SBATCH --reservation=kurs00095
+#SBATCH -A kurs00102
+#SBATCH -p kurs00102
+#SBATCH --reservation=kurs00102
 
-# Switch to custom Spack installation and enable prepared environment
-export SPACK_USER_CACHE_PATH=${HOME}/.pengspack
-export SPACK_USER_CONFIG_PATH=${HOME}/.pengspack
-source /work/home/kurse/kurs00095/pengspack/share/spack/setup-env.sh
-spack env activate /work/home/kurse/kurs00095/task3-spackenv
+# enable prepared environment
+spack env activate /work/home/kurse/kurs00102/common/spenv
 
 srun bash -c "sleep 2 && lscpu -e"
 

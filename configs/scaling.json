@@ -6,7 +6,7 @@
   "raw_results_root": "$HPC_SCRATCH/minicfd",
   "slurm": {
     "job_name": "minicfd-scaling",
-    "time": "03:00:00"
+    "time": "01:00:00"
   },
   "notes": "Adjust domain_sizes, end_times, and omp_proc_binds after the pilot and placement campaigns.",
   "benchmark": {

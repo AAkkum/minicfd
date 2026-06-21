@@ -16,7 +16,7 @@
       128
     ],
     "end_times": [
-      50
+      10
     ],
     "step_size": 0.4,
     "preconditioner": "dic",

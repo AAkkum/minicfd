@@ -1,0 +1,45 @@
+{
+  "campaign_name": "hpctoolkit",
+  "campaign_kind": "hpctoolkit",
+  "repo_root": "$HOME/minicfd",
+  "build_name": "baseline-build",
+  "raw_results_root": "$HPC_SCRATCH/minicfd",
+  "slurm": {
+    "job_name": "minicfd-hpctk",
+    "time": "02:00:00"
+  },
+  "notes": "Adjust the parallel case after the baseline scaling campaign.",
+  "hpctoolkit": {
+    "executable": "minicfd",
+    "cases": [
+      {
+        "label": "serial",
+        "threads": 1,
+        "omp_places": "cores",
+        "omp_proc_bind": "spread",
+        "domain_size": 128,
+        "end_time": 50,
+        "step_size": 0.4,
+        "preconditioner": "dic",
+        "disable_output": true,
+        "log_level": "off",
+        "repetitions": 1,
+        "extra_args": []
+      },
+      {
+        "label": "parallel",
+        "threads": 52,
+        "omp_places": "cores",
+        "omp_proc_bind": "spread",
+        "domain_size": 128,
+        "end_time": 50,
+        "step_size": 0.4,
+        "preconditioner": "dic",
+        "disable_output": true,
+        "log_level": "off",
+        "repetitions": 1,
+        "extra_args": []
+      }
+    ]
+  }
+}

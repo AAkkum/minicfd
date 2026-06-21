@@ -14,6 +14,12 @@ To enable trace logging, pass `-DENABLE_TRACE_LOG=ON` to CMake. (Note, that you 
 ./minicfd -h # print help about command-line arguments
 ```
 
+### Benchmark-friendly runs
+Use `--disable-output` to avoid file I/O during timing and profiling runs:
+```bash
+OMP_NUM_THREADS=16 ./minicfd -d 100 -e 6 -s 0.4 --disable-output
+```
+
 ### Visualization runs 
 A good size for trying out the simulation and generating data for visualization is 64x64x64 grid cells.
 ```bash
@@ -49,3 +55,39 @@ Then, run:
 tests/unittests
 tests/integrationtests
 ```
+
+## Lichtenberg workflow
+The repository contains a small automation layer for the seminar workflow:
+
+- `scripts/build_cluster.sh`: build the named cluster configurations
+- `configs/*.json`: example benchmark/profiling campaign definitions
+- `scripts/generate_campaign.py`: validate a config and generate a submit script
+- `scripts/run_campaign.slurm`: generic Slurm entry point for timing campaigns
+- `scripts/run_hpctoolkit.slurm`: generic Slurm entry point for HPCToolkit runs
+- `scripts/collect_results.py`: normalize raw run folders into one CSV file
+- `scripts/aggregate_results.py`: compute grouped statistics, speedup, and efficiency
+- `scripts/plot_*.py`: generate paper-ready figures from the CSV files
+
+Use the cluster paths like this:
+
+- keep the repository in `$HOME`, for example `$HOME/minicfd`
+- keep large raw outputs in `$HPC_SCRATCH/minicfd`
+- submit jobs from the login node, but do not use login-node runs as benchmark data
+
+Typical usage on Lichtenberg:
+```bash
+cd $HOME/minicfd
+bash scripts/build_cluster.sh baseline-build
+python3 scripts/generate_campaign.py --config configs/pilot.json --output-dir scripts/generated/pilot
+bash scripts/generated/pilot/submit.sh
+python3 scripts/collect_results.py --input $HPC_SCRATCH/minicfd --output results/summary/pilot.csv
+python3 scripts/aggregate_results.py --input results/summary/pilot.csv --output results/summary/pilot_aggregated.csv
+```
+
+Minimal first workflow:
+
+1. Build once in `$HOME/minicfd`
+2. Submit the pilot campaign with Slurm
+3. Wait for the Slurm job to finish
+4. Collect the raw results from `$HPC_SCRATCH/minicfd` into CSV
+5. Only after that move on to placement, scaling, and HPCToolkit

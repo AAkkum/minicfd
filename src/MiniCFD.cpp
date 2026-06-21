@@ -22,6 +22,7 @@ int main(int argc, char** argv) {
         ("o,output-prefix", "Output file prefix", cxxopts::value<std::string>()->default_value("fields"))
         ("f,output-format", "Output file format (csv, raw)", cxxopts::value<std::string>()->default_value("csv"))
         ("p,preconditioner", "Preconditioner type (none, jacobi, dic)", cxxopts::value<std::string>()->default_value("dic"))
+        ("disable-output", "Disable file output for benchmarking and profiling")
         ("h,help", "Print usage")
     ;
     // clang-format on
@@ -93,7 +94,7 @@ int main(int argc, char** argv) {
         .outputPrefix = args["output-prefix"].as<std::string>(),
         .preconditionerType = preconditionerType,
         .fileFormat = fileFormat,
-        .disableFileOutput = false,
+        .disableFileOutput = args.count("disable-output") > 0,
     };
 
     // run simulation

@@ -1,0 +1,36 @@
+{
+  "campaign_name": "pilot",
+  "campaign_kind": "benchmark",
+  "repo_root": "$HOME/minicfd",
+  "build_name": "baseline-build",
+  "raw_results_root": "$HPC_SCRATCH/minicfd",
+  "slurm": {
+    "job_name": "minicfd-pilot",
+    "time": "01:00:00"
+  },
+  "benchmark": {
+    "executable": "minicfd",
+    "domain_sizes": [
+      64,
+      96,
+      128
+    ],
+    "end_times": [
+      50
+    ],
+    "step_size": 0.4,
+    "preconditioner": "dic",
+    "threads": [
+      1,
+      16
+    ],
+    "omp_places": "cores",
+    "omp_proc_binds": [
+      "spread"
+    ],
+    "repetitions": 3,
+    "log_level": "off",
+    "disable_output": true,
+    "extra_args": []
+  }
+}

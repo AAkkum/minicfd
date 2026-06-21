@@ -4,5 +4,13 @@
 /.cache/
 /.vscode/
 /venv/
+/.venv/
+/__pycache__/
+*.pyc
+*.pyo
+/scripts/generated/
+/fields.csv.*
+/frame_*.png
+/anim*.png
 
 slurm-*

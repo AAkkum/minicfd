@@ -6,7 +6,7 @@
   "raw_results_root": "$HPC_SCRATCH/minicfd",
   "slurm": {
     "job_name": "minicfd-hpctk",
-    "time": "02:00:00"
+    "time": "03:00:00"
   },
   "notes": "Adjust the parallel case after the baseline scaling campaign.",
   "hpctoolkit": {

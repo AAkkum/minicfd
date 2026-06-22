@@ -80,7 +80,7 @@ cd $HOME/minicfd
 bash scripts/build_cluster.sh baseline-build
 python3 scripts/generate_campaign.py --config configs/pilot.json --output-dir scripts/generated/pilot
 bash scripts/generated/pilot/submit.sh
-python3 scripts/collect_results.py --input $HPC_SCRATCH/minicfd --output results/summary/pilot.csv
+python3 scripts/collect_results.py --input $HPC_SCRATCH/minicfd/pilot --output results/summary/pilot.csv
 python3 scripts/aggregate_results.py --input results/summary/pilot.csv --output results/summary/pilot_aggregated.csv
 ```
 

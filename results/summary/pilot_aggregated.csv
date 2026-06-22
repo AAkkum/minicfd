@@ -1,0 +1,7 @@
+campaign_name,campaign_kind,build_name,threads,omp_places,omp_proc_bind,domain_size,end_time,step_size,preconditioner,output_disabled,sample_count,mean_wall_time_sec,median_wall_time_sec,stddev_wall_time_sec,relative_stddev_percent,speedup_vs_1thread,efficiency_vs_1thread
+pilot,benchmark,baseline-build,1,cores,spread,128,10,0.4,dic,True,3,537.570000000,537.900000000,2.124311653,0.395169,1.000000,1.000000
+pilot,benchmark,baseline-build,16,cores,spread,128,10,0.4,dic,True,2,464.695000000,464.695000000,0.714177849,0.153687,1.157533,0.072346
+pilot,benchmark,baseline-build,1,cores,spread,64,10,0.4,dic,True,3,30.480000000,30.300000000,0.410731056,1.347543,1.000000,1.000000
+pilot,benchmark,baseline-build,16,cores,spread,64,10,0.4,dic,True,3,22.373333333,22.380000000,0.030550505,0.136549,1.353887,0.084618
+pilot,benchmark,baseline-build,1,cores,spread,96,10,0.4,dic,True,3,135.923333333,135.940000000,0.096090235,0.070694,1.000000,1.000000
+pilot,benchmark,baseline-build,16,cores,spread,96,10,0.4,dic,True,3,108.740000000,108.610000000,0.536935750,0.493779,1.251634,0.078227

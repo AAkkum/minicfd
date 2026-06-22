@@ -1,0 +1,9 @@
+campaign_name,campaign_kind,build_name,threads,omp_places,omp_proc_bind,domain_size,end_time,step_size,preconditioner,output_disabled,sample_count,mean_wall_time_sec,median_wall_time_sec,stddev_wall_time_sec,relative_stddev_percent,speedup_vs_1thread,efficiency_vs_1thread
+placement,benchmark,baseline-build,16,cores,close,96,10,0.4,dic,True,3,108.043333333,108.180000000,0.245424802,0.227154,,
+placement,benchmark,baseline-build,32,cores,close,96,10,0.4,dic,True,3,109.570000000,109.770000000,0.454312668,0.414632,,
+placement,benchmark,baseline-build,52,cores,close,96,10,0.4,dic,True,3,111.126666667,111.340000000,0.608714492,0.547766,,
+placement,benchmark,baseline-build,104,cores,close,96,10,0.4,dic,True,3,112.903333333,112.910000000,0.120138809,0.106409,,
+placement,benchmark,baseline-build,16,cores,spread,96,10,0.4,dic,True,3,108.720000000,108.630000000,0.173493516,0.159578,,
+placement,benchmark,baseline-build,32,cores,spread,96,10,0.4,dic,True,3,109.370000000,108.970000000,0.817067929,0.747068,,
+placement,benchmark,baseline-build,52,cores,spread,96,10,0.4,dic,True,3,109.776666667,109.820000000,0.356978057,0.325186,,
+placement,benchmark,baseline-build,104,cores,spread,96,10,0.4,dic,True,3,112.743333333,112.740000000,0.315013227,0.279407,,

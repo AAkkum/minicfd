@@ -36,7 +36,7 @@ class Grid {
                k >= 0 && k < getDepth();
     }
 
-    Vec3<T> getNearestInsidePos(Vec3<T> pos) {
+    Vec3<T> getNearestInsidePos(Vec3<T> pos) const {
         auto maxX = width * cellSize;
         auto maxY = height * cellSize;
         auto maxZ = depth * cellSize;

@@ -7,4 +7,4 @@ scaling-opt-a,benchmark,opt-a-build,16,cores,spread,96,10,0.4,dic,True,3,103.693
 scaling-opt-a,benchmark,opt-a-build,32,cores,spread,96,10,0.4,dic,True,3,103.143333333,103.180000000,0.072341781,0.070137,1.307618,0.040863
 scaling-opt-a,benchmark,opt-a-build,52,cores,spread,96,10,0.4,dic,True,3,103.450000000,103.510000000,0.158745079,0.153451,1.303449,0.025066
 scaling-opt-a,benchmark,opt-a-build,64,cores,spread,96,10,0.4,dic,True,3,103.140000000,103.190000000,0.209523268,0.203145,1.307491,0.020430
-scaling-opt-a,benchmark,opt-a-build,104,cores,spread,96,10,0.4,dic,True,2,105.210000000,105.210000000,0.240416306,0.228511,1.282388,0.012331
+scaling-opt-a,benchmark,opt-a-build,104,cores,spread,96,10,0.4,dic,True,3,105.320000000,105.380000000,0.255342907,0.242445,1.280319,0.012311

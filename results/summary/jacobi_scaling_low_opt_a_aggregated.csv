@@ -1,0 +1,5 @@
+campaign_name,campaign_kind,build_name,threads,omp_places,omp_proc_bind,domain_size,end_time,step_size,preconditioner,output_disabled,sample_count,mean_wall_time_sec,median_wall_time_sec,stddev_wall_time_sec,relative_stddev_percent,speedup_vs_1thread,efficiency_vs_1thread
+jacobi-scaling-low-opt-a,benchmark,opt-a-build,1,cores,spread,96,10,0.4,jacobi,True,3,223.670000000,223.690000000,0.131148770,0.058635,1.000000,1.000000
+jacobi-scaling-low-opt-a,benchmark,opt-a-build,2,cores,spread,96,10,0.4,jacobi,True,3,189.470000000,189.430000000,0.202977831,0.107129,1.180858,0.590429
+jacobi-scaling-low-opt-a,benchmark,opt-a-build,4,cores,spread,96,10,0.4,jacobi,True,3,172.293333333,172.250000000,0.102143690,0.059285,1.298636,0.324659
+jacobi-scaling-low-opt-a,benchmark,opt-a-build,8,cores,spread,96,10,0.4,jacobi,True,3,165.366666667,165.330000000,0.072341781,0.043746,1.352991,0.169124

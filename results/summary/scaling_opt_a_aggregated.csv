@@ -1,0 +1,10 @@
+campaign_name,campaign_kind,build_name,threads,omp_places,omp_proc_bind,domain_size,end_time,step_size,preconditioner,output_disabled,sample_count,mean_wall_time_sec,median_wall_time_sec,stddev_wall_time_sec,relative_stddev_percent,speedup_vs_1thread,efficiency_vs_1thread
+scaling-opt-a,benchmark,opt-a-build,1,cores,spread,96,10,0.4,dic,True,3,134.916666667,134.920000000,0.085049005,0.063038,1.000000,1.000000
+scaling-opt-a,benchmark,opt-a-build,2,cores,spread,96,10,0.4,dic,True,3,118.346666667,118.420000000,0.153731367,0.129899,1.139335,0.569667
+scaling-opt-a,benchmark,opt-a-build,4,cores,spread,96,10,0.4,dic,True,3,109.193333333,109.190000000,0.065064071,0.059586,1.235644,0.308911
+scaling-opt-a,benchmark,opt-a-build,8,cores,spread,96,10,0.4,dic,True,3,104.780000000,104.720000000,0.149331845,0.142519,1.288388,0.161049
+scaling-opt-a,benchmark,opt-a-build,16,cores,spread,96,10,0.4,dic,True,3,103.693333333,103.880000000,0.440719109,0.425022,1.298806,0.081175
+scaling-opt-a,benchmark,opt-a-build,32,cores,spread,96,10,0.4,dic,True,3,103.143333333,103.180000000,0.072341781,0.070137,1.307618,0.040863
+scaling-opt-a,benchmark,opt-a-build,52,cores,spread,96,10,0.4,dic,True,3,103.450000000,103.510000000,0.158745079,0.153451,1.303449,0.025066
+scaling-opt-a,benchmark,opt-a-build,64,cores,spread,96,10,0.4,dic,True,3,103.140000000,103.190000000,0.209523268,0.203145,1.307491,0.020430
+scaling-opt-a,benchmark,opt-a-build,104,cores,spread,96,10,0.4,dic,True,2,105.210000000,105.210000000,0.240416306,0.228511,1.282388,0.012331

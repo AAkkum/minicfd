@@ -1,0 +1,41 @@
+{
+  "campaign_name": "scaling-opt-a",
+  "campaign_kind": "benchmark",
+  "repo_root": "$HOME/minicfd",
+  "build_name": "opt-a-build",
+  "raw_results_root": "$HPC_SCRATCH/minicfd",
+  "slurm": {
+    "job_name": "minicfd-scaling-opt-a",
+    "time": "01:00:00"
+  },
+  "benchmark": {
+    "executable": "minicfd",
+    "domain_sizes": [
+      96
+    ],
+    "end_times": [
+      10
+    ],
+    "step_size": 0.4,
+    "preconditioner": "dic",
+    "threads": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      52,
+      64,
+      104
+    ],
+    "omp_places": "cores",
+    "omp_proc_binds": [
+      "spread"
+    ],
+    "repetitions": 3,
+    "log_level": "off",
+    "disable_output": true,
+    "extra_args": []
+  }
+}

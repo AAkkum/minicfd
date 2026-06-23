@@ -73,9 +73,6 @@ def main() -> None:
         raw_root / config["campaign_name"] / utc_now().replace(":", "-")
     )
     runs_dir = ensure_dir(campaign_dir / "runs")
-    struct_dir = ensure_dir(campaign_dir / "struct")
-    struct_path = struct_dir / f"{executable.name}.hpcstruct"
-
     manifest = {
         "campaign_name": config["campaign_name"],
         "campaign_kind": config["campaign_kind"],
@@ -91,18 +88,6 @@ def main() -> None:
     }
     write_json(campaign_dir / "campaign_manifest.json", manifest)
 
-    struct_stdout = campaign_dir / "hpcstruct.stdout.log"
-    struct_stderr = campaign_dir / "hpcstruct.stderr.log"
-    struct_exit = run_command(
-        ["hpcstruct", "-o", str(struct_path), str(executable)],
-        cwd=repo_root,
-        env=os.environ.copy(),
-        stdout_path=struct_stdout,
-        stderr_path=struct_stderr,
-    )
-    if struct_exit != 0:
-        raise SystemExit("hpcstruct failed")
-
     for case_index, case in enumerate(config["hpctoolkit"]["cases"], start=1):
         case_name = case.get("label", f"case-{case_index:02d}")
         repetitions = int(case.get("repetitions", 1))
@@ -113,6 +98,8 @@ def main() -> None:
             stdout_path = run_dir / "stdout.log"
             stderr_path = run_dir / "stderr.log"
             time_path = run_dir / "time.txt"
+            hpcstruct_stdout = run_dir / "hpcstruct.stdout.log"
+            hpcstruct_stderr = run_dir / "hpcstruct.stderr.log"
             hpcprof_stdout = run_dir / "hpcprof.stdout.log"
             hpcprof_stderr = run_dir / "hpcprof.stderr.log"
 
@@ -168,8 +155,18 @@ def main() -> None:
             if exit_code != 0:
                 raise SystemExit(f"hpcrun failed for {case_name}")
 
+            hpcstruct_exit = run_command(
+                ["hpcstruct", str(measurements_dir)],
+                cwd=repo_root,
+                env=os.environ.copy(),
+                stdout_path=hpcstruct_stdout,
+                stderr_path=hpcstruct_stderr,
+            )
+            if hpcstruct_exit != 0:
+                raise SystemExit(f"hpcstruct failed for {case_name}")
+
             hpcprof_exit = run_command(
-                ["hpcprof", "-S", str(struct_path), "-o", str(database_dir), str(measurements_dir)],
+                ["hpcprof", "-o", str(database_dir), str(measurements_dir)],
                 cwd=repo_root,
                 env=os.environ.copy(),
                 stdout_path=hpcprof_stdout,

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [[ $# -lt 1 || $# -gt 2 ]]; then
-    echo "usage: $0 <baseline-build|vec-report-build> [repo-root]" >&2
+    echo "usage: $0 <baseline-build|opt-a-build|vec-report-build> [repo-root]" >&2
     exit 1
 fi
 
@@ -11,7 +11,7 @@ repo_root=${2:-$(pwd)}
 build_dir="${repo_root}/build/${build_name}"
 
 case "${build_name}" in
-    baseline-build)
+    baseline-build|opt-a-build)
         cmake_args=(
             -S "${repo_root}"
             -B "${build_dir}"

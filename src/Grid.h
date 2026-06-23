@@ -94,6 +94,8 @@ class Field {
 
     std::shared_ptr<Grid<T>> getGrid() const { return grid; }
 
+    const Grid<T>& getGridRef() const { return *grid; }
+
     T getValue(size_t x, size_t y, size_t z, unsigned dim = 0) const {
         if (!grid->inBounds(x, y, z)) {
             // Note: Boundary conditions need to be handled explicitly

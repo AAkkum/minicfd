@@ -19,7 +19,8 @@ inline Vec3<T> traceBackward(Vec3<T> endPos, const VelocityField<T>& U,
     auto k4 = U.trilerp(endPos - k3 * dt);
 
     auto res = endPos - (k1 + k2 * 2 + k3 * 2 + k4) * (dt / 6.0);
-    return U.getGrid()->getNearestInsidePos(res);
+    //return U.getGrid()->getNearestInsidePos(res);
+    return U.getGridRef().getNearestInsidePos(res);
 }
 
 template <typename T>
@@ -71,7 +72,8 @@ template <typename T>
 inline PressureField<T> solvePressureCorrection(
     const VelocityField<T>& U_adv, const PressureField<T>& p, double dt,
     PreconditionerType preconditioner = PreconditionerType::DIC) {
-    auto& grid = *U_adv.getGrid();
+    //auto& grid = *U_adv.getGrid();
+    auto& grid = U_adv.getGridRef();
 
     auto size = grid.getCellCount();
     auto cellSize = grid.getCellSize();

@@ -1,0 +1,36 @@
+{
+  "campaign_name": "jacobi-scaling-low-opt-b",
+  "campaign_kind": "benchmark",
+  "repo_root": "$HOME/minicfd",
+  "build_name": "opt-b-build",
+  "raw_results_root": "$HPC_SCRATCH/minicfd",
+  "slurm": {
+    "job_name": "minicfd-jacobi-low-b",
+    "time": "01:00:00"
+  },
+  "benchmark": {
+    "executable": "minicfd",
+    "domain_sizes": [
+      96
+    ],
+    "end_times": [
+      10
+    ],
+    "step_size": 0.4,
+    "preconditioner": "jacobi",
+    "threads": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "omp_places": "cores",
+    "omp_proc_binds": [
+      "spread"
+    ],
+    "repetitions": 3,
+    "log_level": "off",
+    "disable_output": true,
+    "extra_args": []
+  }
+}

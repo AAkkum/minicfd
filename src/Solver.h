@@ -24,6 +24,7 @@ struct JacobiPreconditioner : public Preconditioner<T> {
         assert(A.getCols() == A.getRows());
 
         auto n = _rDiag.getSize();
+#pragma omp parallel for schedule(static)
         for (int i = 0; i < n; i++) {
             _rDiag[i] = 1.0 / A(i, i);
         }
@@ -34,6 +35,7 @@ struct JacobiPreconditioner : public Preconditioner<T> {
         assert(x.getSize() == n);
 
         Vector<T> res(n);
+#pragma omp parallel for schedule(static)
         for (int i = 0; i < n; i++) {
             res[i] = _rDiag[i] * x[i];
         }

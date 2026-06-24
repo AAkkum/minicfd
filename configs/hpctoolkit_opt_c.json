@@ -1,0 +1,45 @@
+{
+  "campaign_name": "hpctoolkit-opt-c",
+  "campaign_kind": "hpctoolkit",
+  "repo_root": "$HOME/minicfd",
+  "build_name": "opt-c-build",
+  "raw_results_root": "$HPC_SCRATCH/minicfd",
+  "slurm": {
+    "job_name": "minicfd-hpctk-opt-c",
+    "time": "01:00:00"
+  },
+  "notes": "Optimization C follow-up profile on the same DIC benchmark case.",
+  "hpctoolkit": {
+    "executable": "minicfd",
+    "cases": [
+      {
+        "label": "serial",
+        "threads": 1,
+        "omp_places": "cores",
+        "omp_proc_bind": "spread",
+        "domain_size": 96,
+        "end_time": 10,
+        "step_size": 0.4,
+        "preconditioner": "dic",
+        "disable_output": true,
+        "log_level": "off",
+        "repetitions": 1,
+        "extra_args": []
+      },
+      {
+        "label": "parallel",
+        "threads": 16,
+        "omp_places": "cores",
+        "omp_proc_bind": "spread",
+        "domain_size": 96,
+        "end_time": 10,
+        "step_size": 0.4,
+        "preconditioner": "dic",
+        "disable_output": true,
+        "log_level": "off",
+        "repetitions": 1,
+        "extra_args": []
+      }
+    ]
+  }
+}

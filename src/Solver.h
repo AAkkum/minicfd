@@ -15,6 +15,11 @@ struct Preconditioner {
                                    const Vector<T>& x) {
         return x;
     }
+
+    virtual void precondition(const SparseMatrix<T>& A, const Vector<T>& x,
+                              Vector<T>& out) {
+        out = precondition(A, x);
+    }
 };
 
 template <typename T>
@@ -34,10 +39,19 @@ struct JacobiPreconditioner : public Preconditioner<T> {
         assert(x.getSize() == n);
 
         Vector<T> res(n);
-        for (int i = 0; i < n; i++) {
-            res[i] = _rDiag[i] * x[i];
-        }
+        precondition(A, x, res);
         return res;
+    }
+
+    void precondition(const SparseMatrix<T>& A, const Vector<T>& x,
+                      Vector<T>& out) override {
+        auto n = _rDiag.getSize();
+        assert(x.getSize() == n);
+        assert(out.getSize() == n);
+
+        for (int i = 0; i < n; i++) {
+            out[i] = _rDiag[i] * x[i];
+        }
     }
 
   private:
@@ -141,7 +155,8 @@ Vector<T> pcg(const SparseMatrix<T>& A, const Vector<T>& b,
 
     // Initialize residual vector
     Vector<T> residual = b - A.spmv(x);
-    Vector<T> h = p.precondition(A, residual);
+    Vector<T> h(b.getSize());
+    p.precondition(A, residual, h);
 
     // Initialize search direction vector
     Vector<T> direction = h;
@@ -159,13 +174,13 @@ Vector<T> pcg(const SparseMatrix<T>& A, const Vector<T>& b,
         SPDLOG_TRACE("PCG residual={}", oldSqrResidNorm);
         Vector<T> z = A.spmv(direction);
 
-        T step_size = dot(residual, h) / dot(direction, z);
+        T step_size = oldSqrResidNorm / dot(direction, z);
 
         // Update solution
         x.axpy(step_size, direction);
         // Update residual
         residual.axpy(-step_size, z);
-        h = p.precondition(A, residual);
+        p.precondition(A, residual, h);
 
         // Update search direction vector
         T newSqrResidNorm = dot(residual, h);

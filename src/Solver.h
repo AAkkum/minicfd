@@ -24,7 +24,6 @@ struct JacobiPreconditioner : public Preconditioner<T> {
         assert(A.getCols() == A.getRows());
 
         auto n = _rDiag.getSize();
-#pragma omp parallel for schedule(static)
         for (int i = 0; i < n; i++) {
             _rDiag[i] = 1.0 / A(i, i);
         }
@@ -35,7 +34,6 @@ struct JacobiPreconditioner : public Preconditioner<T> {
         assert(x.getSize() == n);
 
         Vector<T> res(n);
-#pragma omp parallel for schedule(static)
         for (int i = 0; i < n; i++) {
             res[i] = _rDiag[i] * x[i];
         }
@@ -164,15 +162,15 @@ Vector<T> pcg(const SparseMatrix<T>& A, const Vector<T>& b,
         T step_size = dot(residual, h) / dot(direction, z);
 
         // Update solution
-        x = x + (direction * step_size);
+        x.axpy(step_size, direction);
         // Update residual
-        residual = residual - (z * step_size);
+        residual.axpy(-step_size, z);
         h = p.precondition(A, residual);
 
         // Update search direction vector
         T newSqrResidNorm = dot(residual, h);
         T beta = newSqrResidNorm / oldSqrResidNorm;
-        direction = h + (direction * beta);
+        direction.updateCombination(h, beta);
 
         oldSqrResidNorm = newSqrResidNorm;
     }

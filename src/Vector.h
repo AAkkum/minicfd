@@ -84,6 +84,26 @@ class Vector {
         return res;
     }
 
+    void axpy(T alpha, const Vector<T>& other) {
+        assert(this->getSize() == other.getSize() &&
+               "AXPY requires vectors of the same size.");
+
+#pragma omp simd
+        for (size_t i = 0; i < this->getSize(); i++) {
+            _data[i] += alpha * other[i];
+        }
+    }
+
+    void updateCombination(const Vector<T>& other, T beta) {
+        assert(this->getSize() == other.getSize() &&
+               "Vector combination requires vectors of the same size.");
+
+#pragma omp simd
+        for (size_t i = 0; i < this->getSize(); i++) {
+            _data[i] = other[i] + beta * _data[i];
+        }
+    }
+
     inline size_t getSize() const { return _data.size(); }
 
   private:

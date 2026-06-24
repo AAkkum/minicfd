@@ -1,11 +1,11 @@
 {
-  "campaign_name": "jacobi-screen-opt-a",
+  "campaign_name": "jacobi-scaling-low-opt-c",
   "campaign_kind": "benchmark",
   "repo_root": "$HOME/minicfd",
-  "build_name": "opt-a-build",
+  "build_name": "opt-c-build",
   "raw_results_root": "$HPC_SCRATCH/minicfd",
   "slurm": {
-    "job_name": "minicfd-jacobi-screen",
+    "job_name": "minicfd-jacobi-low-opt-c",
     "time": "01:00:00"
   },
   "benchmark": {
@@ -20,7 +20,9 @@
     "preconditioner": "jacobi",
     "threads": [
       1,
-      16
+      2,
+      4,
+      8
     ],
     "omp_places": "cores",
     "omp_proc_binds": [

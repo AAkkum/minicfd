@@ -1,0 +1,41 @@
+{
+  "campaign_name": "scaling-jacobi",
+  "campaign_kind": "benchmark",
+  "repo_root": "$HOME/minicfd",
+  "build_name": "baseline-build",
+  "raw_results_root": "$HPC_SCRATCH/minicfd",
+  "slurm": {
+    "job_name": "minicfd-scaling-jacobi",
+    "time": "01:00:00"
+  },
+  "notes": "Full baseline Jacobi scaling campaign. Uses two repetitions to stay within the one-hour course partition limit.",
+  "benchmark": {
+    "executable": "minicfd",
+    "domain_sizes": [
+      96
+    ],
+    "end_times": [
+      10
+    ],
+    "step_size": 0.4,
+    "preconditioner": "jacobi",
+    "threads": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      52,
+      104
+    ],
+    "omp_places": "cores",
+    "omp_proc_binds": [
+      "spread"
+    ],
+    "repetitions": 2,
+    "log_level": "off",
+    "disable_output": true,
+    "extra_args": []
+  }
+}
